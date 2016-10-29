@@ -34,6 +34,20 @@ class DirectionsApi:
     def read(self, lat1, long1, lat2, long2, key=None):
         return self.parse(self.make_request(lat1, long1, lat2, long2, key))
 
+    def getGrid(self, offset):
+        left = -84.6808815
+        right = -84.0808815
+        top = 34.0946135
+        bottom = 33.4946135
+        coords = []
+        while left <= right:
+            bot = bottom
+            while bot <= top:
+                coord = [bot, left]
+                coords.append(coord)
+                bot += offset
+            left += offset
+        return coords
     @staticmethod
     def find_surrounding(lat, long, length, mile_increment):
         """Generates coordinates in a square around the center.
@@ -47,14 +61,18 @@ class DirectionsApi:
             mean points are 0.5 miles away from each other in the area
 
         """
-
+        Left = -84.6808815
+        Right = -84.0808815
+        Top = 34.0946135
+        Bottom = 33.4946135
+        length = float(length)
         d = DirectionsApi()
         center = [lat, long]
 
-        all_coords = []  # instead of having this to hold all data, can just post datum by datum to database within the for loop
-        top_left_x = round(((float(center[0])) + (145 * length / 2 * 0.0001)), 4)  # x + 145 = 1 mile in ATL
-        top_left_y = round(((float(center[1])) - (174 * length / 2 * 0.0001)), 4)  # y - 174 = 1 mile in ATL
-
+        top_left_x = round(((float(center[0])) + (145 * length * 2 * 0.0001)), 4)  # x + 145 = 1 mile in ATL
+        top_left_y = round(((float(center[1])) - (174 * length * 2 * 0.0001)), 4)  # y - 174 = 1 mile in ATL
+        print(top_left_x)
+        print(top_left_y)
         data = []
 
         for x in range(int(length / mile_increment)):
@@ -65,11 +83,11 @@ class DirectionsApi:
                 """If you want to get duration as well, uncomment below. Above is for testing"""
                 try:
                     time = d.read(lat, long, (str)(coord_x), (str)(coord_y))
-                    data.append({'lat': coord_x, 'long': coord_y, 'count': time})
+                    data.append({'lat': coord_x, 'lng': coord_y, 'count': time})
                 except:
                     print("No transit data")
 
-        return all_coords
+        return data
 
 
 
