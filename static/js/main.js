@@ -19,21 +19,21 @@ var myOptions = {
 var marker;
 // standard map
 map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-// heatmap layer
-// var rectangle = new google.maps.Rectangle({
-//   strokeColor: '#ff7500',
-//   strokeOpacity: 1,
-//   strokeWeight: 5,
-//   fillColor: '#FF0000',
-//   fillOpacity: 0,
-//   map: map,
-//   bounds: {
-//     north: 33.7707,
-//     south: 33.6112,
-//     east: -84.3271,
-//     west: -84.4141
-//     }
-//   });
+ //heatmap layer
+ var rectangle = new google.maps.Rectangle({
+   strokeColor: '#ff7500',
+   strokeOpacity: 1,
+   strokeWeight: 5,
+   fillColor: '#FF0000',
+   fillOpacity: 0,
+   map: map,
+   bounds: {
+     north: 33.7973,
+     south: 33.7248,
+     east:  -84.2310,
+     west: -84.4224
+     }
+   });
 
 heatmap = new HeatmapOverlay(map,
         {
@@ -51,7 +51,9 @@ heatmap = new HeatmapOverlay(map,
             // which field name in your data represents the longitude - default "lng"
             lngField: 'lng',
             // which field name in your data represents the data value - default "value"
-            valueField: 'count'
+            valueField: 'count',
+            //make everything above 90min red
+            max: '5400'
         }
 );
 
