@@ -4,6 +4,8 @@
 console.log('here')
 var myLatlng = new google.maps.LatLng(33.7490, -84.3880);
     // map options,
+
+
 var myOptions = {
     zoom: 10,
     maxZoom: 20, // for zooming in
@@ -15,6 +17,21 @@ var marker;
 // standard map
 map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 // heatmap layer
+var rectangle = new google.maps.Rectangle({
+  strokeColor: '#FF0000',
+  strokeOpacity: 1,
+  strokeWeight: 5,
+  fillColor: '#FF0000',
+  fillOpacity: 0,
+  map: map,
+  bounds: {
+    north: 33.7707,
+    south: 33.6112,
+    east: -84.3271,
+    west: -84.4141
+    }
+  });
+
 console.log('here');
 heatmap = new HeatmapOverlay(map,
         {
