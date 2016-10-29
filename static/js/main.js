@@ -153,7 +153,8 @@ function checkBounds() {
     }
 }
 function getHeatMap() {
-
+    $('#button-text').hide();
+    $('.fa-spinner').show()
     console.log("lat", currentLatlng.lat);
     console.log("lng", currentLatlng.lng);
     $.post({
@@ -165,6 +166,8 @@ function getHeatMap() {
             }
         }
     ,function(data) {
+        $('#button-text').show();
+        $('.fa-spinner').hide();
         var testData = {
             max: 0,
             data: data['heatmap']
@@ -174,6 +177,7 @@ function getHeatMap() {
 
         var top_left = data['top_left'];
         var bottom_right = data['bottom_right'];
+
         if (rectangle) {
             rectangle.setMap(null);
         }

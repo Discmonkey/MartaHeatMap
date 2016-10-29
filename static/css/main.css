@@ -167,3 +167,6 @@ p {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+.fa-spinner {
+    display: None;
+}
