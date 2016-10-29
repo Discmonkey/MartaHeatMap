@@ -28,17 +28,6 @@
             font-weight: 200;
             z-index: 10000;
         }
-
-        #all-examples-info {
-            position: absolute;
-            background: white;
-            font-size: 16px;
-            padding: 20px;
-            bottom: 20px;
-            width: 350px;
-            line-height: 150%;
-            border: 1px solid rgba(0, 0, 0, .2);
-        }
     </style>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="/build/heatmap.js"></script>
@@ -61,7 +50,7 @@
             {
                 // radius should be small ONLY if scaleRadius is true (or small radius is intended)
                 "radius": 2,
-                "maxOpacity": 1,
+                "maxOpacity": 0.5,
                 // scales the radius based on map zoom
                 "scaleRadius": true,
                 // if set to false the heatmap uses the global maximum for colorization
