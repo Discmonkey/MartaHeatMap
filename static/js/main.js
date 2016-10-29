@@ -1,7 +1,7 @@
 /**
  * Created by maxg on 10/29/16.
  */
-
+var rectangle;
 var myLatlng = new google.maps.LatLng(33.7490, -84.3880);
     // map options,
 var currentLatlng = {
@@ -20,20 +20,7 @@ var marker;
 // standard map
 map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
  //heatmap layer
- var rectangle = new google.maps.Rectangle({
-   strokeColor: '#ff7500',
-   strokeOpacity: 1,
-   strokeWeight: 5,
-   fillColor: '#FF0000',
-   fillOpacity: 0,
-   map: map,
-   bounds: {
-     north: 33.7973,
-     south: 33.7248,
-     east:  -84.2310,
-     west: -84.4224
-     }
-   });
+
 
 heatmap = new HeatmapOverlay(map,
         {
@@ -180,16 +167,30 @@ function getHeatMap() {
     ,function(data) {
         var testData = {
             max: 0,
-            data: data
+            data: data['heatmap']
         };
         heatmap.setData(testData);
         map.setCenter(new google.maps.LatLng(currentLatlng.lat, currentLatlng.lng));
-        // heatmap.setData({max:10, data: data});
+
+        var top_left = data['top_left'];
+        var bottom_right = data['bottom_right'];
+        if (rectangle) {
+            rectangle.setMap(null);
+        }
+        rectangle = new google.maps.Rectangle({
+           strokeColor: '#ff7500',
+           strokeOpacity: 1,
+           strokeWeight: 5,
+           fillColor: '#FF0000',
+           fillOpacity: 0,
+           map: map,
+           bounds: {
+             north: top_left[0],
+             south: bottom_right[0],
+             west:  top_left[1],
+             east: bottom_right[1]
+           }
+        });
     })
 }
-var testData = {
-    max: 0,
-    data: [{lat: 33.7707, lng: -84.4141, count: 1990},{lat: 33.7707, lng: -84.39670000000001, count: 1664},{lat: 33.7707, lng: -84.3793, count: 1969},{lat: 33.7707, lng: -84.3619, count: 2119},{lat: 33.7707, lng: -84.34450000000001, count: 1707},{lat: 33.7707, lng: -84.3271, count: 2101},{lat: 33.7562, lng: -84.4141, count: 694},{lat: 33.7562, lng: -84.39670000000001, count: 306},{lat: 33.7562, lng: -84.3793, count: 742},{lat: 33.7562, lng: -84.3619, count: 1225},{lat: 33.7562, lng: -84.34450000000001, count: 1378},{lat: 33.7562, lng: -84.3271, count: 925},{lat: 33.741699999999994, lng: -84.4141, count: 1503},{lat: 33.741699999999994, lng: -84.39670000000001, count: 951},{lat: 33.741699999999994, lng: -84.3793, count: 673},{lat: 33.741699999999994, lng: -84.3619, count: 1248},{lat: 33.741699999999994, lng: -84.34450000000001, count: 1592},{lat: 33.741699999999994, lng: -84.3271, count: 1151},{lat: 33.727199999999996, lng: -84.4141, count: 1758},{lat: 33.727199999999996, lng: -84.39670000000001, count: 1663},{lat: 33.727199999999996, lng: -84.3793, count: 1222},{lat: 33.727199999999996, lng: -84.3619, count: 953},{lat: 33.727199999999996, lng: -84.34450000000001, count: 1931},{lat: 33.727199999999996, lng: -84.3271, count: 1806},{lat: 33.7127, lng: -84.4141, count: 2118},{lat: 33.7127, lng: -84.39670000000001, count: 1972},{lat: 33.7127, lng: -84.3793, count: 1253},{lat: 33.7127, lng: -84.3619, count: 1605},{lat: 33.7127, lng: -84.34450000000001, count: 1702},{lat: 33.7127, lng: -84.3271, count: 1844},{lat: 33.6982, lng: -84.4141, count: 2292},{lat: 33.6982, lng: -84.39670000000001, count: 2304},{lat: 33.6982, lng: -84.3793, count: 1724},{lat: 33.6982, lng: -84.3619, count: 2378},{lat: 33.6982, lng: -84.34450000000001, count: 2343},{lat: 33.6982, lng: -84.3271, count: 2399}]
-};
 
-// heatmap.setData(testData);

@@ -36,10 +36,15 @@ def get_map():
             return json.dumps(cache), 200, {'Content-Type': 'application/json;charset=UTF-8'}
 
         d = DirectionsApi()
-        heatmap = d.find_surrounding(lat, lng, length, .5)
-        write_cache(lat, lng, length, heatmap)
+        heatmap, top_left, bottom_right = d.find_surrounding(lat, lng, length, .5)
+        return_obj = {
+            'heatmap': heatmap,
+            'top_left': top_left,
+            'bottom_right': bottom_right
+        }
+        write_cache(lat, lng, length, return_obj)
 
-        return json.dumps(heatmap), 200, {'Content-Type': 'application/json;charset=UTF-8'}
+        return json.dumps(return_obj), 200, {'Content-Type': 'application/json;charset=UTF-8'}
 
 if __name__ == '__main__':
     app.run()

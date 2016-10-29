@@ -68,22 +68,22 @@ class DirectionsApi:
         top_left_x = round(((float(center[1])) - (174 * (length/2) * 0.0001)), 4)  # y - 174 = 1 mile in ATL
         top_left_y = round(((float(center[0])) + (145 * (length/2) * 0.0001)), 4)  # x + 145 = 1 mile in ATL
 
-        print(top_left_x)
-        print(top_left_y)
         data = []
-
+        i = 0
         for x in range(int(length / mile_increment)):
             coord_x = top_left_x + ((x-1) * 174 * 0.0001)
             for y in range(int(length / mile_increment)):
                 coord_y = top_left_y - ((y-1) * 145 * 0.0001)
-
+                if i == 0:
+                    top_left_point = (coord_y, coord_x)
+                    i += 1
                 try:
                     time = d.read(lat, long, (str)(coord_y), (str)(coord_x))
                     data.append({'lat': coord_y, 'lng': coord_x, 'count': time})
                 except:
                     print("No transit data")
-
-        return data
+        top_right_point = (coord_y, coord_x)
+        return data, list(top_left_point), list(top_right_point)
 
 
 
