@@ -35,7 +35,7 @@ class DirectionsApi:
         return self.parse(self.make_request(lat1, long1, lat2, long2, key))
 
     @staticmethod
-    def find_surrounding(input_coord, length, mile_increment):
+    def find_surrounding(lat, long, length, mile_increment):
         """Generates coordinates in a square around the center.
 
         Keyword arguments:
@@ -49,7 +49,7 @@ class DirectionsApi:
         """
 
         d = DirectionsApi()
-        center = ['33.7490', '-84.3880']
+        center = [lat, long]
 
         all_coords = []  # instead of having this to hold all data, can just post datum by datum to database within the for loop
         top_left_x = round(((float(center[0])) + (145 * length / 2 * 0.0001)), 4)  # x + 145 = 1 mile in ATL
@@ -64,7 +64,7 @@ class DirectionsApi:
 
                 """If you want to get duration as well, uncomment below. Above is for testing"""
                 try:
-                    time = d.read(input_coord[0], input_coord[1], (str)(coord_x), (str)(coord_y))
+                    time = d.read(lat, long, (str)(coord_x), (str)(coord_y))
                     data.append({'lat': coord_x, 'long': coord_y, 'count': time})
                 except:
                     print("No transit data")

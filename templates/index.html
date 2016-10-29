@@ -28,17 +28,20 @@
 </div>-->
 <div>
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div class="container">
-<div id="header navbar navbar-default">
-    <div class="navbar navbar-header">
-        <img src="{{ url_for('static',filename='img/marta-logo.png')}}"
-                       alt="marta logo" height="40" width="40">
+
+    <div id="header navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar navbar-header">
+                <img src="{{ url_for('static',filename='img/marta-logo.png')}}"
+                               alt="marta logo" height="40" width="40">
+            </div>
+            <div class="nav navbar-nav">
+                <img style="display:block; margin: auto;" src="{{ url_for('static', filename='img/name.png') }}"
+                 alt="marta logo" height="40">
+            </div>
+        </div>
     </div>
-    <div class="nav navbar-nav">
-    <img style="display:block; margin: auto;" src="{{ url_for('static', filename='img/name.png') }}"
-         alt="marta logo" height="40"></div>
-    </div>
-</div>
+<div class='container'>
     <div class="row">
         <div class="col-md-12">
             <div id="map-canvas"></div>

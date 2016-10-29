@@ -108,3 +108,7 @@ input[type=submit]:hover {
 .pac-container {
     font-family: Roboto;
 }
+
+.navbar-default {
+    background-color: #eee;
+}
