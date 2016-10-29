@@ -18,7 +18,7 @@
 
         #map-canvas {
             height: 100%;
-            width: 70%
+            width: 100%;
         }
 
         h1 {
@@ -30,18 +30,18 @@
             z-index: 10000;
         }
 
-        .container {
-            position: relative;
-            width: 100%;
-        }
+        <!-- .container { -->
+            <!-- position: relative; -->
+            <!-- width: 100%; -->
+        <!-- } -->
 
-        .right {
-            margin: auto;
-            position: absolute;
-            top: 20px;
-            right: 0px;
-            width: 28%;
-        }
+        <!-- .right { -->
+            <!-- margin: auto; -->
+            <!-- position: absolute; -->
+            <!-- top: 20px; -->
+            <!-- right: 0px; -->
+            <!-- width: 28%; -->
+        <!-- } -->
 
         form {
             border-radius: 5px;
@@ -76,20 +76,25 @@
         }
 
     </style>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxDlf8XlxdfIa-_vzdxSwLOpeqdi2iWqY&libraries=places"></script>
     <script src="/build/heatmap.js"></script>
     <script src="/gmaps-heatmap/gmaps-heatmap.js"></script>
 </head>
 <body>
-<div class="container">
-    <div class="right">
-            Location<br>
-            <input type="text" name="location">
-            <br>
-            <input type="submit" value="Submit">
-    </div>
-</div>
+<!-- <div class="container"> -->
+    <!-- <div class="right"> -->
+            <!-- Location<br>  -->
+            <!-- <input type="text" name="location"> -->
+            <!-- <br> -->
+            <!-- <input type="submit" value="Submit"> -->
+        <!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box"> -->
+        <!-- <div id="map"></div> -->
+    <!-- </div> -->
+<!-- </div> -->
+
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map-canvas"></div>
+
 <script>
     // map center
     var myLatlng = new google.maps.LatLng(33.7490, -84.3880);
@@ -125,6 +130,7 @@
     );
     
     google.maps.event.addListener(map, 'click', function(event) {
+        <!-- for reverse geocoding -->
         placeMarker(event.latLng);
         var latitude = event.latLng.lat();
         var longitude = event.latLng.lng();
@@ -133,10 +139,6 @@
     });
 
     function placeMarker(location) {
-        <!-- var marker = new google.maps.Marker({ -->
-            <!-- position: location, -->
-            <!-- map: map -->
-        <!-- }); -->
         if (marker) {
             marker.setPosition(location);
         } else {
@@ -147,6 +149,59 @@
         }
     }
 
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+        var place = searchBox.getPlaces()[0]; // gets first result if there are multiple
+
+        if (place == null || place.length == 0) {
+            return;
+        }
+
+      // Clear out the old markers.
+        markers.forEach(function(marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+
+      // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        
+        if (!place.geometry) {
+            console.log("Returned place contains no geometry");
+            return;
+        }
+        var icon = {
+            rl: place.icon,
+            ize: new google.maps.Size(71, 71),
+            rigin: new google.maps.Point(0, 0),
+            nchor: new google.maps.Point(17, 34),
+            caledSize: new google.maps.Size(25, 25)
+        };
+        
+        console.log("lat: " + place.geometry.location.lat() + " lng: " + place.geometry.location.lng())
+        
+        placeMarker(place.geometry.location);
+
+        if (place.geometry.viewport) {
+            bounds.union(place.geometry.viewport);
+        } else {
+            bounds.extend(place.geometry.location);
+        }
+        map.fitBounds(bounds);
+    });
+      
 
     var testData = {
         max: 0,
@@ -164,6 +219,7 @@
 
     heatmap.setData(testData);
 
+    
 </script>
 </body>
 </html>
