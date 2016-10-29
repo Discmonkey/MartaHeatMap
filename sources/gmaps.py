@@ -32,29 +32,32 @@ class DirectionsApi:
 # res_j = d.parse(res_p)
 # print(res_j)
 
-def find_surrounding():
+def find_surrounding(input_coord, mile_increment):
     """Generates coordinates in a square around the center"""
     d = DirectionsApi()
-    coordinates = ['33.7490', '-84.3880'] # HARDCODED FOR NOW, read in data
+    center = ['33.7490', '-84.3880']
     
-    all_coords = [] # instead of having this to hold all data, can just post datum by datum to datbase
-    top_left_x = round((((float) (coordinates[0])) + (145 * 2.5 * 0.0001)), 4) # x + 145 = 1 mile in ATL
-    top_left_y = round((((float) (coordinates[1])) - (174 * 2.5 * 0.0001)), 4) # y - 174 = 1 mile in ATL
+    all_coords = [] # instead of having this to hold all data, can just post datum by datum to database
+    top_left_x = round((((float) (center[0])) + (145 * 2.5 * 0.0001)), 4) # x + 145 = 1 mile in ATL
+    top_left_y = round((((float) (center[1])) - (174 * 2.5 * 0.0001)), 4) # y - 174 = 1 mile in ATL
     top_left_coord = (top_left_x, top_left_y)
     
-    for x in range(5):
+    for x in range(int(5 / mile_increment)):
         coord_x = top_left_x - x * 145 * 0.0001
-        for y in range(5):
+        for y in range(int(5 / mile_increment)):
             coord_y = top_left_y + y * 174 * 0.0001
-            try:
-                print(d.parse(d.make_request(coordinates[0], coordinates[1], (str) (coord_x), (str) (coord_y))))
-            except:
-                print("No transit data")
+            all_coords.append((round(coord_x, 4), round(coord_y, 4)))
+            
+            """If you want to get duration as well, uncomment below. Above is for testing"""
+            # try:
+                # print(d.parse(d.make_request(input_coord[0], input_coord[1], (str) (coord_x), (str) (coord_y))))
+            # except:
+                # print("No transit data")
             
             # all_coords.append((round(top_left_x, 4), round(top_left_y, 4), duration))
-            all_coords.append((round(coord_x, 4), round(coord_y, 4)))
+            
     print(all_coords)       
     
-find_surrounding()    
+find_surrounding(['33.7490', '-84.3880'], 0.5) # HARDCODED FOR NOW, read in data later
     
     
