@@ -121,10 +121,22 @@
                 valueField: 'count'
             }
     );
+    
+    google.maps.event.addListener(map, 'click', function(event) {
+        placeMarker(event.latLng);
+        var latitude = event.latLng.lat();
+        var longitude = event.latLng.lng();
+        console.log(latitude);
+        console.log(longitude);
+    });
 
-    function getDistance(latitude, longitude) {
-
+    function placeMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
     }
+
 
     var testData = {
         max: 0,
