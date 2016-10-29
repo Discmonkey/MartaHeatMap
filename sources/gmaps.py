@@ -3,12 +3,12 @@ import json
 
 # api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
 # replaced with Jonathan's API key
-api_key = 'AIzaSyA99KgXUFhvyxIbiX_sDprmN9PGYwKbazQ'
+api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
 
 
 class DirectionsApi:
     # api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
-    api_key = 'AIzaSyA99KgXUFhvyxIbiX_sDprmN9PGYwKbazQ'
+    api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
 
     def make_request(self, lat1, long1, lat2, long2, key=None):
 
@@ -61,29 +61,25 @@ class DirectionsApi:
             mean points are 0.5 miles away from each other in the area
 
         """
-        Left = -84.6808815
-        Right = -84.0808815
-        Top = 34.0946135
-        Bottom = 33.4946135
         length = float(length)
         d = DirectionsApi()
         center = [lat, long]
 
-        top_left_x = round(((float(center[0])) + (145 * length * 2 * 0.0001)), 4)  # x + 145 = 1 mile in ATL
-        top_left_y = round(((float(center[1])) - (174 * length * 2 * 0.0001)), 4)  # y - 174 = 1 mile in ATL
+        top_left_x = round(((float(center[1])) - (174 * (length/2) * 0.0001)), 4)  # y - 174 = 1 mile in ATL
+        top_left_y = round(((float(center[0])) + (145 * (length/2) * 0.0001)), 4)  # x + 145 = 1 mile in ATL
+
         print(top_left_x)
         print(top_left_y)
         data = []
 
         for x in range(int(length / mile_increment)):
-            coord_x = top_left_x - x * 145 * 0.0001
+            coord_x = top_left_x + ((x-1) * 174 * 0.0001)
             for y in range(int(length / mile_increment)):
-                coord_y = top_left_y + y * 174 * 0.0001
+                coord_y = top_left_y - ((y-1) * 145 * 0.0001)
 
-                """If you want to get duration as well, uncomment below. Above is for testing"""
                 try:
-                    time = d.read(lat, long, (str)(coord_x), (str)(coord_y))
-                    data.append({'lat': coord_x, 'lng': coord_y, 'count': time})
+                    time = d.read(lat, long, (str)(coord_y), (str)(coord_x))
+                    data.append({'lat': coord_y, 'lng': coord_x, 'count': time})
                 except:
                     print("No transit data")
 

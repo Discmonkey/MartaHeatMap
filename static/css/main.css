@@ -128,3 +128,7 @@ p {
     text-align: center;
     color: white;
 }
+
+.btn {
+    margin-bottom: 20px;
+}
