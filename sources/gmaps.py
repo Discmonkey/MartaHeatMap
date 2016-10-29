@@ -32,19 +32,29 @@ class DirectionsApi:
 # res_j = d.parse(res_p)
 # print(res_j)
 
-def find_surrounding(input_coord, mile_increment):
-    """Generates coordinates in a square around the center"""
+def find_surrounding(input_coord, length, mile_increment):
+    """Generates coordinates in a square around the center.
+    
+    Keyword arguments:
+    input_coord -- the coordinate representing the area to be compared with
+        all other points in the area
+    length -- the length in miles of the side to be used for the area, e.g. 5 
+        would mean the area would be 25 sq. miles
+    mile_increment -- how much space there is between points, e.g. 0.5 would
+        mean points are 0.5 miles away from each other in the area
+    
+    """
     d = DirectionsApi()
     center = ['33.7490', '-84.3880']
     
-    all_coords = [] # instead of having this to hold all data, can just post datum by datum to database within the foor loop
-    top_left_x = round((((float) (center[0])) + (145 * 2.5 * 0.0001)), 4) # x + 145 = 1 mile in ATL
-    top_left_y = round((((float) (center[1])) - (174 * 2.5 * 0.0001)), 4) # y - 174 = 1 mile in ATL
+    all_coords = [] # instead of having this to hold all data, can just post datum by datum to database within the for loop
+    top_left_x = round((((float) (center[0])) + (145 * length / 2 * 0.0001)), 4) # x + 145 = 1 mile in ATL
+    top_left_y = round((((float) (center[1])) - (174 * length / 2 * 0.0001)), 4) # y - 174 = 1 mile in ATL
     top_left_coord = (top_left_x, top_left_y)
     
-    for x in range(int(5 / mile_increment)):
+    for x in range(int(length / mile_increment)):
         coord_x = top_left_x - x * 145 * 0.0001
-        for y in range(int(5 / mile_increment)):
+        for y in range(int(length / mile_increment)):
             coord_y = top_left_y + y * 174 * 0.0001
             all_coords.append((round(coord_x, 4), round(coord_y, 4)))
             
@@ -58,6 +68,7 @@ def find_surrounding(input_coord, mile_increment):
             
     print(all_coords)       
     
-find_surrounding(['33.7490', '-84.3880'], 0.5) # HARDCODED FOR NOW, read in data later
+# find_surrounding(input_coord = ['33.7490', '-84.3880'], length = 5, mile_increment = 0.5) # HARDCODED FOR NOW, read in data later
+find_surrounding(input_coord = ['33.7490', '-84.3880'], length = 20, mile_increment = 2) # HARDCODED FOR NOW, read in data later
     
     
