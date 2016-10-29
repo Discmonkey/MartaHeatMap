@@ -7,9 +7,9 @@ var myLatlng = new google.maps.LatLng(33.7490, -84.3880);
 
 
 var myOptions = {
-    zoom: 10,
-    maxZoom: 20, // for zooming in
-    minZoom: 9, // for zooming out
+    zoom: 13,
+    maxZoom: 16, // for zooming in
+    minZoom: 11, // for zooming out
     center: myLatlng
 };
 console.log('here');
@@ -31,6 +31,8 @@ var rectangle = new google.maps.Rectangle({
     west: -84.4141
     }
   });
+
+
 
 console.log('here');
 heatmap = new HeatmapOverlay(map,
