@@ -99,6 +99,8 @@
         maxZoom: 20,
         center: myLatlng
     };
+    
+    var marker;
     // standard map
     map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
     // heatmap layer
@@ -131,10 +133,18 @@
     });
 
     function placeMarker(location) {
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map
-        });
+        <!-- var marker = new google.maps.Marker({ -->
+            <!-- position: location, -->
+            <!-- map: map -->
+        <!-- }); -->
+        if (marker) {
+            marker.setPosition(location);
+        } else {
+            marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
     }
 
 
