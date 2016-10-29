@@ -4,11 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <title>Googlemaps Heatmap Layer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxDlf8XlxdfIa-_vzdxSwLOpeqdi2iWqY&libraries=places"></script>
     <script src="{{ url_for('static', filename='build/heatmap.js')}}"></script>
     <script src="{{ url_for('static', filename='gmaps-heatmap/gmaps-heatmap.js')}}"></script>
+
 </head>
 <body>
 <!--<div class="container">
@@ -23,10 +28,23 @@
 </div>-->
 <div>
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div id="header" ><img src="{{ url_for('static',filename='img/marta-logo.png')}}" alt="marta logo" height="40" width="40"><img style="display:block; margin: auto;" src="{{ url_for('static', filename='img/name.png') }}" alt="marta logo" height="40"></div>
+<div class="container">
+<div id="header navbar navbar-default">
+    <div class="navbar navbar-header">
+        <img src="{{ url_for('static',filename='img/marta-logo.png')}}"
+                       alt="marta logo" height="40" width="40">
+    </div>
+    <div class="nav navbar-nav">
+    <img style="display:block; margin: auto;" src="{{ url_for('static', filename='img/name.png') }}"
+         alt="marta logo" height="40"></div>
+    </div>
 </div>
-<div id="map-canvas"></div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map-canvas"></div>
+        </div>
+    </div>
+</div>
 <script src="{{ url_for('static', filename='js/main.js') }}">
 </script>
 </body>

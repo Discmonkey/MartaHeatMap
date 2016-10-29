@@ -12,6 +12,9 @@ body {
 #map-canvas {
     height: 100%;
     width: 100%;
+    display: block;
+    height: 400px;
+    width: 100%;
 }
 
 /*        h1 {
