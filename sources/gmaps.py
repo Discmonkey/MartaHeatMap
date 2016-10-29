@@ -3,12 +3,12 @@ import json
 
 # api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
 # replaced with Jonathan's API key
-api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
+api_key = 'AIzaSyBZ1bO7LUZDOQo0xXQP2eXaom44vvA005Y'
 
 
 class DirectionsApi:
     # api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
-    api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
+    api_key = 'AIzaSyBZ1bO7LUZDOQo0xXQP2eXaom44vvA005Y'
 
     def make_request(self, lat1, long1, lat2, long2, key=None):
 
@@ -61,6 +61,18 @@ class DirectionsApi:
             mean points are 0.5 miles away from each other in the area
 
         """
+        if length == '3':
+            weight = 1
+        elif length == '4':
+            weight = 2
+        elif length == '5':
+            weight = 3
+        elif length == '2':
+            weight = 0
+        elif length == '1':
+            weight = -1
+        else:
+            weight = 1
         length = float(length)
         d = DirectionsApi()
         center = [lat, long]
@@ -70,10 +82,11 @@ class DirectionsApi:
 
         data = []
         i = 0
+
         for x in range(int(length / mile_increment)):
-            coord_x = top_left_x + ((x-1) * 174 * 0.0001)
+            coord_x = top_left_x + ((x-weight) * 174 * 0.0001)
             for y in range(int(length / mile_increment)):
-                coord_y = top_left_y - ((y-1) * 145 * 0.0001)
+                coord_y = top_left_y - ((y-weight) * 145 * 0.0001)
                 if i == 0:
                     top_left_point = (coord_y, coord_x)
                     i += 1
