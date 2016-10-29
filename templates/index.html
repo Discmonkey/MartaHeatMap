@@ -17,16 +17,6 @@
 
 </head>
 <body>
-<!--<div class="container">
-    <div class="right">
-        Location<br>
-        <input type="text" name="location">
-        <br>
-        <input type="submit" value="Submit">
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <div id="map"></div>
-    </div>
-</div>-->
 <div>
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     <nav class="navbar navbar-default" role="navigation">
@@ -70,7 +60,20 @@
             </div>
         </div>
     <div class="row text-center">
-        <button class="btn btn-success" onclick="getHeatMap()"> Generate Map </button>
+        <div class="col-md-6 col-md-offset-3">
+        <select class ='select-picker form-control' id="lengths">
+
+                <option value=1>1 mile</option>
+                <option value=2>2 miles</option>
+                <option value=3>3 miles</option>
+                <option value=4>4 miles</option>
+                <option value=5>5 miles</option>
+
+        </select>
+        </div>
+    </div>
+    <div class="row text-center">
+        <button class="btn btn-primary" onclick="getHeatMap()"> Generate Map </button>
     </div>
     <div class="row">
         <div class="col-md-12">

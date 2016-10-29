@@ -174,7 +174,7 @@ function getHeatMap() {
             data: {
                 lat: currentLatlng.lat,
                 lng: currentLatlng.lng,
-                length: 3
+                length: parseInt($('#lengths').val())
             }
         }
     ,function(data) {
