@@ -37,7 +37,7 @@ def find_surrounding(input_coord, mile_increment):
     d = DirectionsApi()
     center = ['33.7490', '-84.3880']
     
-    all_coords = [] # instead of having this to hold all data, can just post datum by datum to database
+    all_coords = [] # instead of having this to hold all data, can just post datum by datum to database within the foor loop
     top_left_x = round((((float) (center[0])) + (145 * 2.5 * 0.0001)), 4) # x + 145 = 1 mile in ATL
     top_left_y = round((((float) (center[1])) - (174 * 2.5 * 0.0001)), 4) # y - 174 = 1 mile in ATL
     top_left_coord = (top_left_x, top_left_y)

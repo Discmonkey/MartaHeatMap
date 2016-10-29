@@ -100,8 +100,9 @@
     var myLatlng = new google.maps.LatLng(33.7490, -84.3880);
     // map options,
     var myOptions = {
-        zoom: 10,
-        maxZoom: 20,
+        zoom: 12,
+        maxZoom: 14, // for zooming in
+        minZoom: 11, // for zooming out
         center: myLatlng
     };
     
@@ -176,7 +177,7 @@
         markers = [];
 
       // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
+        // var bounds = new google.maps.LatLngBounds();
         
         if (!place.geometry) {
             console.log("Returned place contains no geometry");
@@ -190,17 +191,55 @@
             caledSize: new google.maps.Size(25, 25)
         };
         
-        console.log("lat: " + place.geometry.location.lat() + " lng: " + place.geometry.location.lng())
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
         
-        placeMarker(place.geometry.location);
-
-        if (place.geometry.viewport) {
-            bounds.union(place.geometry.viewport);
+        // if searchBar location is out of bounds, sets marker and lat/lng to center of ATL
+        if (place.geometry.location.lat() > allowedBounds.getNorthEast().lat()
+            || place.geometry.location.lat() < allowedBounds.getSouthWest().lat()
+            || place.geometry.location.lng() > allowedBounds.getNorthEast().lng()
+            || place.geometry.location.lng() < allowedBounds.getSouthWest().lng()) {
+            lat = myLatlng.lat();
+            lng = myLatlng.lng();
+            placeMarker(myLatlng);
+            map.panTo(myLatlng);
         } else {
-            bounds.extend(place.geometry.location);
-        }
-        map.fitBounds(bounds);
+            placeMarker(place.geometry.location);
+        }    
+        console.log("lat: " + lat + " lng: " + lng)
+        <!-- if (place.geometry.viewport) { -->
+            <!-- bounds.union(place.geometry.viewport); -->
+        <!-- } else { -->
+            <!-- bounds.extend(place.geometry.location); -->
+        <!-- } -->
+        <!-- map.fitBounds(bounds); -->
+        
     });
+    
+    // Makes sure the map doesn't stray too far away from ATL
+    google.maps.event.addListener(map,'center_changed',function() { checkBounds(); });
+            
+    var allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(33.535, -84.68), new google.maps.LatLng(34.03, -84.037));
+    
+    function checkBounds() {    
+        if(! allowedBounds.contains(map.getCenter())) {
+            var C = map.getCenter();
+            var X = C.lng();
+            var Y = C.lat();
+            
+            var AmaxX = allowedBounds.getNorthEast().lng();
+            var AmaxY = allowedBounds.getNorthEast().lat();
+            var AminX = allowedBounds.getSouthWest().lng();
+            var AminY = allowedBounds.getSouthWest().lat();
+            
+            if (X < AminX) {X = AminX;}
+            if (X > AmaxX) {X = AmaxX;}
+            if (Y < AminY) {Y = AminY;}
+            if (Y > AmaxY) {Y = AmaxY;}
+            
+            map.setCenter(new google.maps.LatLng(Y,X));
+        }
+    }
       
 
     var testData = {
