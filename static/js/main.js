@@ -18,7 +18,7 @@ var marker;
 map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 // heatmap layer
 var rectangle = new google.maps.Rectangle({
-  strokeColor: '#FF0000',
+  strokeColor: '#ff7500',
   strokeOpacity: 1,
   strokeWeight: 5,
   fillColor: '#FF0000',
