@@ -16,12 +16,11 @@ class DirectionsApi:
             key = DirectionsApi.api_key
 
         url = 'https://maps.googleapis.com/maps/api/directions/json'
-
+        # deleted departure_time key in the future use monday departure time, takes timestamp
         payload = {
             'origin': lat1 + ',' + long1,
             'destination': lat2 + ',' + long2,
             'mode': 'transit',
-            'departure_time': 1477918524,
             'key': key
         }
 
