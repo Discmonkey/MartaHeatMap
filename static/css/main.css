@@ -85,6 +85,19 @@ p {
     font-size: 16px;
 }
 
+.btn_map {
+    background-color: #3b8ec2;;
+    border: none;
+    padding: 4px 11px 4px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin-left: 12px;
+    margin-top: 10px;
+    height: 40px;
+}
+
 .styled-select {
     background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
     height: 29px;

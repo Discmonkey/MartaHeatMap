@@ -197,3 +197,9 @@ function getHeatMap() {
     })
 }
 
+google.maps.event.addListenerOnce(map, 'idle', function(){
+  //loaded fully
+
+ $('#pac-input').after($('#MapButton'));
+
+});
