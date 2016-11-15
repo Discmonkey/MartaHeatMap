@@ -32,15 +32,15 @@ heatmap = new HeatmapOverlay(map,
             // if set to false the heatmap uses the global maximum for colorization
             // if activated: uses the data maximum within the current map boundaries
             //   (there will always be a red spot with useLocalExtremas true)
-            "useLocalExtrema": true,
+            "useLocalExtrema": false,
             // which field name in your data represents the latitude - default "lat"
             latField: 'lat',
             // which field name in your data represents the longitude - default "lng"
             lngField: 'lng',
             // which field name in your data represents the data value - default "value"
             valueField: 'count',
-            //make everything above 90min red
-            max: '5400'
+            //make everything above 40min red
+            max: '2400'
         }
 );
 
