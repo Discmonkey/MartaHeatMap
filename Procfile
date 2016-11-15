@@ -1,1 +1,1 @@
-web: gunicorn MartaHeatMap:app --log-file -
+6web: gunicorn MartaHeatMap:app --log-file -

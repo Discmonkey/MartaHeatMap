@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from MartaHeatMap.sources.gmaps import DirectionsApi
+from sources.gmaps import DirectionsApi
 import json
 import os
 file_path = os.path.dirname(os.path.abspath(__file__))
