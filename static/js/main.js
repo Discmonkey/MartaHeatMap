@@ -174,7 +174,6 @@ function getHeatMap() {
         };
         heatmap.setData(testData);
         map.setCenter(new google.maps.LatLng(currentLatlng.lat, currentLatlng.lng));
-
         var top_left = data['top_left'];
         var bottom_right = data['bottom_right'];
 

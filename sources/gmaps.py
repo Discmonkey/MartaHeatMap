@@ -3,7 +3,7 @@ import json
 
 # api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
 # replaced with Jonathan's API key
-api_key = 'AIzaSyBZ1bO7LUZDOQo0xXQP2eXaom44vvA005Y'
+api_key = 'AIzaSyB6V_cnPLawq06s1_O_1fFYNXB6bqAeunE'
 
 
 class DirectionsApi:
