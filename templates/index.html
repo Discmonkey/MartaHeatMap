@@ -7,6 +7,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript"
@@ -20,38 +22,26 @@
 <body>
 <div>
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<button id="MapButton" class="btn_map btn-primary control" type="submit" onclick="getHeatMap()" style=" z-index: 0; position: absolute; left: 524px; top: 0px;"> <span id="button-text"> Generate Map </span>
+<button id="MapButton" class="btn_map btn-primary control" type="submit" onclick="getHeatMap()"> <span id="button-text"> Generate Map </span>
 		<i class="fa fa-spin fa-spinner"></i>
 </button>
 
-    <!--<nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            
+
             <div class="navbar-header">
-                <img src="{{ url_for('static',filename='img/marta-logo.png')}}"
-                               alt="marta logo" height="40" width="40">
+              <a class="navbar-brand" href="#">  Transit Duration Map</a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="https://martaguide.com/">    Marta Guide    </a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://www.martamenu.com/">    Marta Menu    </a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://atltransit.org/">    ATL Transit    </a>
+            <ul class="nav navbar-nav hidden-xs">
+                <li class="nav-item active hidden-xs">
+                    <a class="nav-link hidden-xs" href="https://youtu.be/ziaqKalMmus"><span class="hidden-xs">Video</span></a>
                 </li>
             </ul>
         </div>
-    </nav>-->
+    </nav>
 
 <div class='container'>
    <div class="row">
-	   <h1>Transit Duration Map</h1>
 	</div>
     <!--
            <div class="row">

@@ -28,7 +28,7 @@
 })("HeatmapOverlay", this, function(h337, gmaps) {
   'use strict';
 
-  var HeatmapOverlay = function(map, cfg){ 
+  var HeatmapOverlay = function(map, cfg){
     this.setMap(map);
     this.initialize(cfg || {});
   };
@@ -57,7 +57,7 @@
 
   HeatmapOverlay.prototype.initialize = function(cfg) {
     this.cfg = cfg;
-    
+
     var map = this.map = this.getMap();
     var container = this.container = document.createElement('div');
     var mapDiv = map.getDiv();
@@ -84,14 +84,14 @@
       'bounds_changed',
       function() { return that.draw(); }
     );
-   
+
     if (!this.heatmap) {
       this.heatmap = h337.create(this.cfg);
     }
     this.draw();
   };
 
-  HeatmapOverlay.prototype.onRemove = function() { 
+  HeatmapOverlay.prototype.onRemove = function() {
     if (!this.map) { return; }
 
     this.map = null;
@@ -172,7 +172,7 @@
 
 
     var latLngPoints = [];
-    // iterate through data 
+    // iterate through data
     var len = this.data.length;
     var layerProjection = this.getProjection();
     var layerOffset = layerProjection.fromLatLngToDivPixel(topLeft);
@@ -189,9 +189,9 @@
 
 
       // we don't wanna render points that are not even on the map ;-)
-      if (!bounds.contains(latlng)) {
-        continue;
-      }
+      //if (!bounds.contains(latlng)) {
+      //  continue;
+      //}
       // local max is the maximum within current bounds
       localMax = Math.max(value, localMax);
       localMin = Math.min(value, localMin);
@@ -221,7 +221,7 @@
 
   };
 
-  HeatmapOverlay.prototype.setData = function(data) { 
+  HeatmapOverlay.prototype.setData = function(data) {
     this.max = data.max;
     this.min = data.min;
 
@@ -261,7 +261,7 @@
         var entry = pointOrArray;
         var latlng = new gmaps.LatLng(entry[latField], entry[lngField]);
         var dataObj = { latlng: latlng };
-        
+
         dataObj[valueField] = entry[valueField];
         if (entry.radius) {
           dataObj.radius = entry.radius;

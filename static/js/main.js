@@ -13,7 +13,8 @@ var myOptions = {
     zoom: 13,
     maxZoom: 16, // for zooming in
     minZoom: 11, // for zooming out
-    center: myLatlng
+    center: myLatlng,
+    mapTypeControl: false
 };
 
 var marker;
@@ -32,7 +33,7 @@ heatmap = new HeatmapOverlay(map,
             // if set to false the heatmap uses the global maximum for colorization
             // if activated: uses the data maximum within the current map boundaries
             //   (there will always be a red spot with useLocalExtremas true)
-            "useLocalExtrema": false,
+            "useLocalExtrema": true,
             // which field name in your data represents the latitude - default "lat"
             latField: 'lat',
             // which field name in your data represents the longitude - default "lng"
@@ -40,7 +41,7 @@ heatmap = new HeatmapOverlay(map,
             // which field name in your data represents the data value - default "value"
             valueField: 'count',
             //make everything above 40min red
-            max: '2400'
+            max: '3600'
         }
 );
 
@@ -194,12 +195,54 @@ function getHeatMap() {
              east: top_left[1]
            }
         });
+
+        rectangle = new google.maps.Rectangle({
+           strokeColor: '#ff7500',
+           strokeOpacity: 1,
+           strokeWeight: 0,
+           fillColor: '#222',
+           fillOpacity: 0.95,
+           map: map,
+           bounds: {
+             north: top_left[0],
+             south: top_left[0]+1,
+             west:  top_left[1]-1,
+             east: top_left[1]+1
+           }
+        });
+
+        rectangle = new google.maps.Rectangle({
+           strokeColor: '#ff7500',
+           strokeOpacity: 1,
+           strokeWeight: 0,
+           fillColor: '#222',
+           fillOpacity: 0.95,
+           map: map,
+           bounds: {
+             north: bottom_right[0]-0.2,
+             south: bottom_right[0],
+             west:  top_left[1]-1,
+             east: top_left[1]+1
+           }
+        });
+
+
+
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+
+
     })
 }
 
 google.maps.event.addListenerOnce(map, 'idle', function(){
   //loaded fully
+  var input = document.getElementById("MapButton");
+  //var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+ //$('#pac-input').after($('#MapButton'));
 
- $('#pac-input').after($('#MapButton'));
+
+
 
 });
