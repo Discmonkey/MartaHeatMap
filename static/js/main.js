@@ -162,7 +162,7 @@ function getHeatMap() {
             data: {
                 lat: currentLatlng.lat,
                 lng: currentLatlng.lng,
-                length: parseInt($('#lengths').val())
+                length: 3 //parseInt($('#lengths').val())
             }
         }
     ,function(data) {
@@ -183,15 +183,15 @@ function getHeatMap() {
         rectangle = new google.maps.Rectangle({
            strokeColor: '#ff7500',
            strokeOpacity: 1,
-           strokeWeight: 5,
-           fillColor: '#FF0000',
-           fillOpacity: 0,
+           strokeWeight: 0,
+           fillColor: '#222',
+           fillOpacity: 0.95,
            map: map,
            bounds: {
-             north: top_left[0],
-             south: bottom_right[0],
-             west:  top_left[1],
-             east: bottom_right[1]
+             north: bottom_right[0],
+             south: top_left[0],
+             west:  bottom_right[1],
+             east: top_left[1]
            }
         });
     })
