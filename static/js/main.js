@@ -181,6 +181,13 @@ function getHeatMap() {
         if (rectangle) {
             rectangle.setMap(null);
         }
+        if(rectangle)
+        {
+          rectangle.setMap(null);
+          rectangle1.setMap(null);
+          rectangle2.setMap(null);
+        }
+
         rectangle = new google.maps.Rectangle({
            strokeColor: '#ff7500',
            strokeOpacity: 1,
@@ -196,7 +203,7 @@ function getHeatMap() {
            }
         });
 
-        rectangle = new google.maps.Rectangle({
+        rectangle1 = new google.maps.Rectangle({
            strokeColor: '#ff7500',
            strokeOpacity: 1,
            strokeWeight: 0,
@@ -211,7 +218,7 @@ function getHeatMap() {
            }
         });
 
-        rectangle = new google.maps.Rectangle({
+        rectangle2 = new google.maps.Rectangle({
            strokeColor: '#ff7500',
            strokeOpacity: 1,
            strokeWeight: 0,
